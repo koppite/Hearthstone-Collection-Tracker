@@ -120,7 +120,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
                 throw new ImportingException("Can't find Hearthstone window.");
             }
 
-            Log.WriteLine(string.Format("[{0}] Waiting for " + ImportStepDelay * 3 + " milliseconds before starting the collection import", LOGGER_CATEGORY), LogType.Debug);
+            Log.WriteLine("Waiting for " + ImportStepDelay * 3 + " milliseconds before starting the collection import", LogType.Info, LOGGER_CATEGORY);
             await Task.Delay(ImportStepDelay * 3);
 
             var hsRect = User32.GetHearthstoneRect(false);
@@ -206,7 +206,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
         {
             if (!User32.IsHearthstoneInForeground())
             {
-                Log.WriteLine(string.Format("[{0}] Importing aborted, window lost focus", LOGGER_CATEGORY), LogType.Warning);
+                Log.WriteLine("Importing aborted, window lost focus", LogType.Info, LOGGER_CATEGORY);
                 throw new ImportingException("Hearthstone window lost focus");
             }
 
@@ -226,7 +226,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
             }
             SendKeys.SendWait("{ENTER}");
 
-            Log.WriteLine(string.Format("[{0}] try to import card: " + card.Name, LOGGER_CATEGORY), LogType.Debug);
+            Log.WriteLine("try to import card: " + card.Name, LogType.Debug, LOGGER_CATEGORY);
             await Task.Delay(ImportStepDelay * 3);
 
             Tuple<int, int> result;
@@ -269,9 +269,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
 
             int size = (int)Math.Round(initialSize * WindowYRatioTo1080);
 
-            //var capture = ScreenCapture.CaptureHearthstone(new Point(posX, posY), size, size, wndHandle);
-            var capture = CaptureHearthstone(new Point(posX, posY), size, size, wndHandle);
-
+            var capture = ScreenCapture.CaptureHearthstone(new Point(posX, posY), size, size, wndHandle);
             if (capture == null)
                 return false;
 
@@ -289,9 +287,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
             int cardYBottom = posY + (int)(WindowYRatioTo1080 * screen1080CardHeight);
             int cardXMiddle = posX + (int)(WindowXRatioTo1920 * screen1920DistanceBeforeAmountLabel);
 
-            var capture = CaptureHearthstone(new Point(cardXMiddle, cardYBottom), size, size, wndHandle);
-            //var capture = ScreenCapture.CaptureHearthstone(new Point(cardXMiddle, cardYBottom), size, size, wndHandle);
-
+            var capture = ScreenCapture.CaptureHearthstone(new Point(cardXMiddle, cardYBottom), size, size, wndHandle);
             if (capture == null)
                 return false;
 
@@ -312,18 +308,11 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
             int borderPosY = posY + (int)(height * 0.35);
             int borderPosX = posX + widthToRightCorner; 
 
-            //var capture = ScreenCapture.CaptureHearthstone(new Point(borderPosX, borderPosY), width, height, wndHandle);
-            var capture = CaptureHearthstone(new Point(borderPosX, borderPosY), width, height, wndHandle);
+            var capture = ScreenCapture.CaptureHearthstone(new Point(borderPosX, borderPosY), width, height, wndHandle);
             if (capture == null)
                 return false;
 
             return capture.GetAvgBrightness() > minBrightness;
         }
-     
-        private Bitmap CaptureHearthstone(Point point, int width, int height, IntPtr wndHandle)
-        {
-            return ScreenCapture.CaptureScreen(wndHandle, point, width, height);
-        }
-           
     }
 }
