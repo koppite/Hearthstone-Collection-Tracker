@@ -45,6 +45,9 @@
     </Win32Resource>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>..\..\Hearthstone-Deck-Tracker\Hearthstone Deck Tracker\bin\Debug\HearthstoneDeckTracker.exe</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>False</Private>
@@ -88,6 +91,8 @@
     <Compile Include="Internal\DataUpdaters\DataUpdaterV022.cs" />
     <Compile Include="Internal\DataUpdaters\DataUpdaterV021.cs" />
     <Compile Include="Internal\DataUpdaters\DataUpdaterV03.cs" />
+    <Compile Include="Internal\DataUpdaters\DataUpdaterV031.cs" />
+    <Compile Include="Internal\DataUpdaters\DataUpdaterV032.cs" />
     <Compile Include="Internal\DataUpdaters\DefaultDataUpdater.cs" />
     <Compile Include="Internal\DataUpdaters\IDataUpdater.cs" />
     <Compile Include="Internal\Helpers.cs" />
@@ -159,13 +164,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\HearthstoneDeckTracker\Hearthstone Deck Tracker\Hearthstone Deck Tracker.csproj">
-      <Project>{e63a3f1c-e662-4e62-be43-af27cb9e953d}</Project>
-      <Name>Hearthstone Deck Tracker</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Internal\HSCollection.ico" />
