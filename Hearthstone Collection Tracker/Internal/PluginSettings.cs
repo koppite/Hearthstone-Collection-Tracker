@@ -124,6 +124,11 @@ namespace Hearthstone_Collection_Tracker.Internal
             SetCardsManager.SaveCollection(setsInfo, activeAccount.FileStoragePath);
         }
 
+        public void SaveCurrentAccount()
+        {
+            SaveCurrentAccount(ActiveAccountSetsInfo.ToList());
+        }
+
         public static PluginSettings LoadSettings(string dataDir)
         {
             string settingsFilePath = Path.Combine(dataDir, STORAGE_FILE_NAME);
