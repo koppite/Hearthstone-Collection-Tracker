@@ -155,7 +155,7 @@ namespace Hearthstone_Collection_Tracker.Internal.Importing
 
         private int CardQty(CardInCollection c)
         {
-            if (c.Card.Rarity == Hearthstone_Deck_Tracker.Enums.Rarity.Legendary)
+            if (c.Card.Rarity == HearthDb.Enums.Rarity.LEGENDARY)
                 return 1;
 
             return 2;

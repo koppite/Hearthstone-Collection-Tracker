@@ -163,7 +163,7 @@ This version updated by Graeme Finn [finnster@gmail.com] https://github.com/kopp
             get { return "Vasilev Konstantin"; }
         }
 
-        public static readonly Version PluginVersion = new Version(0, 3, 2);
+        public static readonly Version PluginVersion = new Version(0, 4, 1);
 
         public Version Version
         {

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
-using Hearthstone_Deck_Tracker.Enums;
+using HearthDb.Enums;
 
 namespace Hearthstone_Collection_Tracker.ViewModels
 {
@@ -19,6 +19,7 @@ namespace Hearthstone_Collection_Tracker.ViewModels
             AmountNonGolden = amountNonGolden;
             AmountGolden = amountGolden;
             DesiredAmount = MaxAmountInCollection;
+            CardId = card.Id;
         }
 
         [XmlIgnore]
@@ -48,13 +49,18 @@ namespace Hearthstone_Collection_Tracker.ViewModels
             }
         }
 
+        public static int GetMaxAmountInCollection(Rarity rarity)
+        {
+            return rarity == Rarity.LEGENDARY ? 1 : 2;
+        }
+
         public int MaxAmountInCollection
         {
             get
             {
                 if (Card == null)
                     throw new ArgumentNullException();
-                return Card.Rarity == Rarity.Legendary ? 1 : 2;
+                return GetMaxAmountInCollection(Card.Rarity);
             }
         }
 
